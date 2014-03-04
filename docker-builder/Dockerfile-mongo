@@ -1,0 +1,19 @@
+# Taking Ubuntu 12.04 as base image for the deployment
+FROM ubuntu:12.04
+
+# Adding source list for mongodb
+RUN sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+RUN echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
+
+# Update apt source list
+RUN apt-get -y update
+
+# Installing redis
+RUN apt-get install mongodb-10gen
+
+# Binding redis port to external network
+EXPOSE 27017
+
+# We'll print local ip assigned to container
+# and start the redis
+ENTRYPOINT ifconfig && mongod -f /etc/mongodb.conf
