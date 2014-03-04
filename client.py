@@ -16,6 +16,8 @@ from celerytask import celery
 from pymongo import MongoClient
 from corenlp import StanfordCoreNLP
 from datetime import datetime
+import jsonrpclib
+from simplejson import loads
 
 # Mongo connection and db init
 mongoClient = MongoClient(config.MONGO_URI)
@@ -44,8 +46,9 @@ def parseArticle(articalId, strText):
     :retval None  
     """
     
-    startAt = datetime.now().strftime('%H:%M:%S:%f')
-    parsedObj = coreNlp.raw_parse(strText)
+    startAt = datetime.now().strftime('%H:%M:%S:%f')    
+    parsedObj = loads(coreNlp.parse(strText))
+    
     ners = []
     for sentence in parsedObj.get('sentences'):
         for word in sentence.get('words'):
@@ -68,4 +71,4 @@ if __name__ == '__main__':
     sendToParser()
     
 if __name__ == 'client':
-    coreNlp = StanfordCoreNLP(config.CORENLP_LIB_DIR, properties='prop.properties')
+    coreNlp = jsonrpclib.Server("http://%s" % config.CORENLP_SERVER)
