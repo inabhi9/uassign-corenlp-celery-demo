@@ -14,7 +14,7 @@ MONGO_INPUT_COLLECTION = "articles"
 #    http://nlp.stanford.edu/software/stanford-corenlp-full-2013-11-12.zip
 CORENLP_SERVER = 'localhost:3549'
 CORENLP_LIB_DIR = '/opt/stanford-corenlp-full-2013-11-12'
-CORENLP_SERVER = ''
+CORENLP_SERVER = '127.0.0.0:3456'
 
 # Celery configuration
 #----------------------------------------------------
