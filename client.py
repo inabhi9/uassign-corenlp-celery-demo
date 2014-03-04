@@ -23,9 +23,6 @@ db = getattr(mongoClient, config.MONGO_DB)
 inputCol = getattr(db, config.MONGO_INPUT_COLLECTION)
 outputCol = getattr(db, config.MONGO_OUTPUT_COLLECTION)
 
-# NLP init
-#
-
 
 def sendToParser():
     """
@@ -61,7 +58,7 @@ def parseArticle(articalId, strText):
     out = {'articleId': articalId,
            'startTime': startAt,
            'endTime': endAt,
-           #'threadId': 1,  
+           # 'threadId': 1,  
            'noNers': len(ners),
            'ner': ners}
     # saving to db
