@@ -37,10 +37,25 @@ To build, run following command
 
     sudo docker build -t nlp_demo/app .
 
-on successful completion, execute image by running following command
 
-    sudo docker run nlp_demo/app
+The application is divided into two parts: 1st) CoreNLP server 2) Celery server.  
+To start coreNLP server, run this command
+
+    sudo docker run nlp_demo/app /usr/local/lib/python2.7/dist-packages/corenlp/corenlp.py -H 0.0.0.0 -p 3456 -S /opt/stanford-corenlp-full-2013-11-12/
     
+To enqueue the jobs, run this command
+
+	sudo docker run nlp_demo/app python /opt/uassign-corenlp-celery-demo/client.py
+
+To start, you need to change CORENLP_SERVER param in config.py in container
+
+	sudo docker run -t -i nlp_demo/app python /bin/bash
+
+
+To start celery,
+
+	celery -A celerytask worker -P gevent -E 
+
 You can run as many container as you want by running above command again and again. This will demonstrate the distributed computing.
 
 ----------
