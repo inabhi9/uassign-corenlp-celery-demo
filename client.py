@@ -33,7 +33,6 @@ def sendToParser():
     mCur = inputCol.find()
     for doc in mCur:
         parseArticle.delay(str(doc.get('_id')), doc.get('description'))
-        break
 
 @celery.task
 def parseArticle(articalId, strText):
