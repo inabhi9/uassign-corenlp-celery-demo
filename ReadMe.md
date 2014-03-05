@@ -1,4 +1,4 @@
-Parallel Sample in Python
+CoreNLP-Celery demo
 ---------------
 
 As per your requirements, I've created a prototype project which iterate through the tasks and send them to the task queue. Output is stored in mongodb itself as for distributing system, storing in file at local system doesn't make sense
