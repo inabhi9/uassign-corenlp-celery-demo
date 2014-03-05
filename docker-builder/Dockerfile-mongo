@@ -16,7 +16,7 @@ EXPOSE 27017
 
 # Fetching database
 WORKDIR /var/lib
-RUN wget https://bitbucket.org/inabhi9/uassign-corenlp-celery-demo/downloads/articles_mongo_dump.zip && unzip -o articles_mongo_dump.zip && rm articles_mongo_dump.zip
+RUN wget --no-check-certificate https://bitbucket.org/inabhi9/uassign-corenlp-celery-demo/downloads/articles_mongo_dump.zip && unzip -o articles_mongo_dump.zip && rm articles_mongo_dump.zip
 
 # We'll print local ip assigned to container
 # and start the redis
