@@ -5,10 +5,14 @@ FROM ubuntu:12.04
 RUN apt-get -y update
 
 # Installing required system components
-RUN apt-get -y install python-dev gcc python-pip git wget unzip python-software-properties nano
+RUN apt-get -y install python-dev gcc python-pip git wget unzip python-software-properties nano supervisor
 RUN add-apt-repository -y ppa:webupd8team/java && apt-get -y update
 RUN echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
 RUN apt-get install oracle-java7-installer -y
+
+# Addig system component configuration
+# This includes supervisor only
+ADD supervisor-app.conf /etc/supervisor/conf.d/apps.conf
 
 # Changing up working directory to /opt
 # to fetching apps and corenlp
@@ -22,5 +26,6 @@ RUN wget http://nlp.stanford.edu/software/stanford-corenlp-full-2013-11-12.zip &
 WORKDIR /opt/uassign-corenlp-celery-demo
 RUN pip install -r requirements.txt
 
-ADD ../config.py /opt/uassign-corenlp-celery-demo/
+# Adding configuration to application
+ADD config.py /opt/uassign-corenlp-celery-demo/
 CMD ifconfig
