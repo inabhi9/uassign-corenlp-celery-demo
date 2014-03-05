@@ -33,7 +33,7 @@ For ubuntu 13.10, but should work on 12.04+
 
 ### Running on local machine
 
-* Make necessary changes to config.py
+* Copy docker-builder/config.py.sample to parent directory as config.py and make necessary changes to it
 * For task worker
     You can run task worker on any no of machine. You need to setup only application requirements
 
@@ -42,3 +42,7 @@ For ubuntu 13.10, but should work on 12.04+
 * To enqueue the task:
 
         python client.py
+
+* You must have coreNLP server up and running. You can run it by
+
+        python /usr/local/lib/python2.7/dist-packages/corenlp/corenlp.py -H 0.0.0.0 -p 3456 -S /opt/stanford-corenlp-full-2013-11-12/
