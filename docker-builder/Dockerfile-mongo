@@ -9,10 +9,14 @@ RUN echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen
 RUN apt-get -y update
 
 # Installing redis
-RUN apt-get install mongodb-10gen
+RUN apt-get install -y mongodb-10gen wget unzip 
 
 # Binding redis port to external network
 EXPOSE 27017
+
+# Fetching database
+WORKDIR /var/lib
+RUN wget https://bitbucket.org/inabhi9/uassign-corenlp-celery-demo/downloads/articles_mongo_dump.zip && unzip -o articles_mongo_dump.zip && rm articles_mongo_dump.zip
 
 # We'll print local ip assigned to container
 # and start the redis
